@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: inventory-service
+  name: inventorys-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: inventory-service
+      app: inventorys-service
   template:
     metadata:
       labels:
-        app: inventory-service
+        app: inventorys-service
     spec:
       containers:
-        - name: inventory-service
-          image: YOUR_DOCKERHUB_USERNAME/inventory-service:1.0.0
+        - name: inventorys-service
+          image: haripriya1310/typescript3-backend:v1
           ports:
             - containerPort: 3000
           readinessProbe:
@@ -29,11 +29,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: inventory-service
+  name: inventorys-service
 spec:
   selector:
     app: inventory-service
   ports:
     - port: 80
       targetPort: 3000
-  type: ClusterIP
+  type: NodePort
